@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  */
 @Document(collection = "rooms")
-public class Rooms/* extends BaseModel*/{
+public class Rooms/* extends BaseModel */ {
 
 	public String roomNumber;
 
