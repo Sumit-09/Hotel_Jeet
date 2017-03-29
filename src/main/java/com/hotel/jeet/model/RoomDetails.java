@@ -1,12 +1,14 @@
 package com.hotel.jeet.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "roomDetails")
 public class RoomDetails {
 
-	private RoomData roomData;
+	@Id
 	private String roomId;
+	private RoomData roomData;
 
 	public RoomData getRoomData() {
 		return roomData;

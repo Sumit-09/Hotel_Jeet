@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
@@ -20,6 +20,7 @@ import com.mongodb.ServerAddress;
 
 @Configuration
 @PropertySource("classpath:mongoDb.properties")
+@EnableMongoRepositories(basePackages = { "com.hotel.jeet.crud.repositary" })
 public class MongoPersistenceProvider {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MongoPersistenceProvider.class);
@@ -31,33 +32,31 @@ public class MongoPersistenceProvider {
 	static final String DB_NAME = "mongo.db.name";
 	static final String DB_CRED = "mongo.db.password";
 	static final String DATABASE = "database";
-	
+
 	@Value("${mongo.db.host}")
 	private String mongoDbHost;
-	
+
 	@Value("${mongo.db.port}")
 	private int mongoDbPort;
-	
+
 	@Value("${mongo.db.name}")
 	private String mongoDbName;
-	
+
 	@Value("${mongo.db.username}")
 	private String mongoDbUsername;
-	
+
 	@Value("${mongo.db.password}")
 	private String mongoDbPassword;
 
-
-
 	@Bean
 	public MongoDbFactory mongoDbFactory() throws Exception {
-	
+
 		LOGGER.debug("Enter : {}", "mongoDbFactory");
 
-		ServerAddress serverAddress = new ServerAddress(mongoDbHost,mongoDbPort);
+		ServerAddress serverAddress = new ServerAddress(mongoDbHost, mongoDbPort);
 
-		MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(
-				mongoDbUsername, mongoDbName,mongoDbPassword.toCharArray());
+		MongoCredential mongoCredential = MongoCredential.createMongoCRCredential(mongoDbUsername, mongoDbName,
+				mongoDbPassword.toCharArray());
 
 		List<MongoCredential> list = new ArrayList<>();
 		list.add(mongoCredential);
@@ -65,7 +64,7 @@ public class MongoPersistenceProvider {
 		MongoClient mongoClient = new MongoClient(serverAddress);
 
 		return new SimpleMongoDbFactory(mongoClient, mongoDbName);
-}
+	}
 
 	@Bean
 	public MongoTemplate mongoTemplate() throws Exception {
