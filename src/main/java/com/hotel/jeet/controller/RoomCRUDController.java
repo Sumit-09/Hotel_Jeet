@@ -36,8 +36,10 @@ public class RoomCRUDController {
 	@RequestMapping(value = "/roomData", method = RequestMethod.POST)
 	public ModelAndView saveRoomData(@ModelAttribute("roomDetails") RoomData roomdata) {
 		roomdata.setRoomID(roomdata.getRoomNo() + "-" + roomdata.getDate());
-		RoomDayDetail roomDayDetail = new RoomDayDetail();
+		RoomDayDetail roomDayDetail;
 		if(roomDayDetailsCrudRepositary.findOne(roomdata.getRoomNo() + "-" + roomdata.getDate()) == null){
+			roomDayDetail = new RoomDayDetail();
+			roomDayDetail.setDate(roomdata.getDate());
 			roomDayDetail.getRoomData().add(roomdata);
 			roomDayDetail.setRoomDay(roomdata.getRoomNo() + "-" + roomdata.getDate());
 			roomDayDetailsCrudRepositary.save(roomDayDetail);
@@ -46,7 +48,6 @@ public class RoomCRUDController {
 			roomDayDetail.getRoomData().add(roomdata);
 			roomDayDetailsCrudRepositary.save(roomDayDetail);
 		}
-		System.out.println("Document Saved");
 		return new ModelAndView("DataSaved");
 	}
 

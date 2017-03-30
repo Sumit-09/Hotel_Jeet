@@ -12,6 +12,7 @@ public class RoomDayDetail {
 	@Id
 	private String roomDay;
 	private Set<RoomData> roomData = new HashSet<>();
+	private String date;
 
 	public String getRoomDay() {
 		return roomDay;
@@ -27,5 +28,13 @@ public class RoomDayDetail {
 
 	public void setRoomData(Set<RoomData> roomData) {
 		this.roomData = roomData;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 }
