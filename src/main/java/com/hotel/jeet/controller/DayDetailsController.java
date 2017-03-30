@@ -85,7 +85,7 @@ public class DayDetailsController {
 			writeBook(roomData, row, sheet);
 		}
         writeTotatInExcel(totalRent,totalCommission,totalEarning, rowCount, sheet);
-		try (FileOutputStream outputStream = new FileOutputStream(new File(new StringBuilder(excelFilePath).append(fileName).toString()))) {
+		try (FileOutputStream outputStream = new FileOutputStream(new File(new StringBuilder(excelFilePath).append(fileName).append(".xls").toString()))) {
 			workbook.write(outputStream);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

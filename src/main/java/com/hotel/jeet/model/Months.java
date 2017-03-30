@@ -8,7 +8,7 @@ package com.hotel.jeet.model;
  *
  */
 public enum Months {
-	JAN(0), FEB(1), MAR(2), APR(3), MAY(4), JUN(5), JUL(6), AUG(7), SEP(8), OCT(9), NOV(10), DEC(11);
+	Jan(0), Feb(1), Mar(2), Apr(3), May(4), Jun(5), Jul(6), Aug(7), Sep(8), Oct(9), Nov(10), Dec(11);
 	int monthNumber;
 
 	Months(int monthNumber) {
