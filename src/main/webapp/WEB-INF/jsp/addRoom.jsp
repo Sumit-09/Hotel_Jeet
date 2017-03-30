@@ -20,6 +20,7 @@
 				<td width="48%"><input type="reset" name="Reset"
 					value="Reset form" /></td>
 			</tr>
+			<tr><td><input type=button value="Back" onCLick="history.back()"></td></tr>
 			</table>
 			</form:form>
 </body>

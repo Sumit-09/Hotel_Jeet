@@ -30,6 +30,7 @@
 					<input type="submit" value="Select Room">
 				</td>
 			</tr>
+			<tr><td><input type=button value="Back" onCLick="history.back()"></td></tr>
 		</table>
 	</form:form>
 </body>

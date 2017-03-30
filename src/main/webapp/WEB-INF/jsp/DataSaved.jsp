@@ -8,5 +8,6 @@
 </head>
 <body>
 	<p>Data Saved</p>
+	<input type=button value="Back" onCLick="history.back()">
 </body>
 </html>
