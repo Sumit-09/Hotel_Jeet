@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hotel.jeet.crud.repositary.RoomDataCrudRepositary;
+import com.hotel.jeet.crud.repositary.RoomDayDetailsCrudRepositary;
 import com.hotel.jeet.model.RoomData;
+import com.hotel.jeet.model.RoomDayDetail;
 
 /**
  * @author sumit.arora
@@ -23,7 +25,7 @@ import com.hotel.jeet.model.RoomData;
 public class RoomCRUDController {
 
 	@Autowired
-	private RoomDataCrudRepositary roomDataCrudRepositary;
+	private RoomDayDetailsCrudRepositary roomDayDetailsCrudRepositary;
 
 	@RequestMapping(value = "/bookRoom", method = RequestMethod.POST)
 	public ModelAndView bookRoom(HttpServletRequest request) {
@@ -34,7 +36,16 @@ public class RoomCRUDController {
 	@RequestMapping(value = "/roomData", method = RequestMethod.POST)
 	public ModelAndView saveRoomData(@ModelAttribute("roomDetails") RoomData roomdata) {
 		roomdata.setRoomID(roomdata.getRoomNo() + "-" + roomdata.getDate());
-		roomDataCrudRepositary.save(roomdata);
+		RoomDayDetail roomDayDetail = new RoomDayDetail();
+		if(roomDayDetailsCrudRepositary.findOne(roomdata.getRoomNo() + "-" + roomdata.getDate()) == null){
+			roomDayDetail.getRoomData().add(roomdata);
+			roomDayDetail.setRoomDay(roomdata.getRoomNo() + "-" + roomdata.getDate());
+			roomDayDetailsCrudRepositary.save(roomDayDetail);
+		}else if (roomDayDetailsCrudRepositary.findOne(roomdata.getRoomNo() + "-" + roomdata.getDate()) != null){
+			roomDayDetail= roomDayDetailsCrudRepositary.findOne(roomdata.getRoomNo() + "-" + roomdata.getDate());
+			roomDayDetail.getRoomData().add(roomdata);
+			roomDayDetailsCrudRepositary.save(roomDayDetail);
+		}
 		System.out.println("Document Saved");
 		return new ModelAndView("DataSaved");
 	}

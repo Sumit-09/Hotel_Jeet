@@ -7,12 +7,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.hotel.jeet.model.RoomData;
+import com.hotel.jeet.model.RoomDayDetail;
 
 /**
  * @author jangfateh.singh
  *
  */
 @Repository
-public interface RoomDetailsCrudRepositary extends CrudRepository<RoomData, String> {
+public interface RoomDayDetailsCrudRepositary extends CrudRepository<RoomDayDetail, String> {
 
 }
